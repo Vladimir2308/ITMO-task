@@ -1,4 +1,4 @@
-public class Task4 {
+public class Lecture1Task4 {
     public static void main(String[] args) {
         int n = 345;
         int answer = 0;

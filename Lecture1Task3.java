@@ -1,4 +1,4 @@
-public class Task3 {
+public class Lecture1Task3 {
     public static void main(String[] args) {
         double n = 4.29;
         System.out.println("До округления n = " + n);
