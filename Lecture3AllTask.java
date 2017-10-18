@@ -190,7 +190,7 @@ public class Lecture3AllTask {
 
     }
 
-    public static void arraysTask11() {
+    private static void arraysTask11() {
         System.out.println("arraysTask 11");
         Scanner scanner = new Scanner(System.in);
         boolean right = false;
@@ -240,7 +240,7 @@ public class Lecture3AllTask {
         System.out.println(Arrays.toString(array));
     }
 
-    public static void arraysTask13() {
+    private static void arraysTask13() {
         System.out.println("arraysTask 13");
         Scanner scanner = new Scanner(System.in);
         boolean right = false;
