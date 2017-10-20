@@ -21,7 +21,7 @@ public class Library {
                 array[num][1] = (Integer) array[num][1] - quantity;
             return (Integer) array[num][1];
         }
-        return -1;
+
     }
 
     int arrayIndex(Book book) {
