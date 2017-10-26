@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Task2ObjectList {
     public static void main(String[] args) {
-        IntList list=new IntList();
+        ObjList list=new ObjList();
         list.add("qqwwe");
         list.add(new Integer(134));
         list.add(new int[5]);
