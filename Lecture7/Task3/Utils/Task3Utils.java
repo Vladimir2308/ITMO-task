@@ -6,31 +6,47 @@ public class Task3Utils {
         List list = new LinkedList();
         list.add("qqwwe");
         list.add(134);
+        Boolean thatTrue = new Boolean(true);
+        list.add(thatTrue);
         list.add(new int[5]);
         list.add("33");
-        ((LinkedList) list).print();
-        System.out.println(list.get(6));
 
-        System.out.println(" Remove " + list.remove(1));
         ((LinkedList) list).print();
-        Stack stack = (Stack) list;
-        stack.push("qqqqqq");
-        stack.push(134);
-        stack.push(new int[445]);
-        stack.push("333");
-        ((LinkedList) list).print();
-        System.out.println(" Stack " + stack.pop() + " " + stack.pop() + " " + stack.pop() + " " + stack.pop());
-        ((LinkedList) list).print();
-        Queue queue = (Queue) stack;
-        queue.add("ZzzZ");
-        queue.add(138);
-        ((LinkedList) list).print();
-        ((LinkedList) list).print();
-//        System.out.println(" Poll " + queue.poll());
-//        ((LinkedList) list).print();
-        int i=0;
-        for(Object item : list) {
-            System.out.println(i++ + " " + ((LinkedList.Item)item).obj);
-        }
+
+        Object temp = Utils.find(new Predicate() {
+            @Override
+            public boolean apply(Object obj) {
+                return obj.equals(true);
+            }
+        }, list);
+        if (temp != null)
+            System.out.println("Объект есть");
+        else
+            System.out.println("Объекта нет");
+
+
+        List list1 = new LinkedList();
+        list1.add("a");
+        list1.add("aa");
+        list1.add("c");
+        list1.add("dfg");
+        Utils.print(list1);
+        List newList = Utils.filter(new Predicate() {
+            @Override
+            public boolean apply(Object obj) {
+                return obj.toString().length() == 1;
+            }
+        }, list1);
+        Utils.print(newList);
+        newList = Utils.transform(new Transformer() {
+            @Override
+            public String tramsform(Object o) {
+                return (o.toString() + o.toString());
+            }
+
+
+        }, list1);
+        Utils.print(newList);
+
     }
 }

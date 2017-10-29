@@ -18,15 +18,14 @@ class LinkedList implements List, Queue, Stack {
 
             @Override
             public boolean hasNext() {
-                return item.next!=null;
+                return item!=null;
             }
 
             @Override
-            public Item next() {
-                if (i==0)
-                    i++;
-                else item=item.next;
-                    return item;
+            public Object next() {
+                Object temp=item.obj;
+                item=item.next;
+                    return temp;
 
             }
             @Override

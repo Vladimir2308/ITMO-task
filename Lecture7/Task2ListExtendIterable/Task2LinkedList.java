@@ -30,8 +30,8 @@ public class Task2LinkedList {
 //        System.out.println(" Poll " + queue.poll());
 //        ((LinkedList) list).print();
         int i=0;
-        for(Object item : list) {
-            System.out.println(i++ + " " + ((LinkedList.Item)item).obj);
+        for(Object o : list) {
+            System.out.println(i++ + " " + o);
         }
     }
 }

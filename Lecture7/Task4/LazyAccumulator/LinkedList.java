@@ -1,10 +1,12 @@
-package Lecture7.Task3.Utils;
+package Lecture7.Task4.LazyAccumulator;
+
 
 import java.util.Iterator;
 
-class LinkedList implements List, Queue, Stack {
+class LinkedList implements List {
     private Item head;
     private int count;
+
     LinkedList() {
         head = null;
         count = -1;
@@ -13,21 +15,22 @@ class LinkedList implements List, Queue, Stack {
     @Override
     public Iterator iterator() {
         return new Iterator() {
-            Item item=head;
-            int i=0;
+            Item item = head;
+            int i = 0;
 
             @Override
             public boolean hasNext() {
-                return item!=null;
+                return item != null;
             }
 
             @Override
-            public Object next() {
-              Item temp=item;
-                item=item.next;
-                    return temp.obj;
+            public Item next() {
+                Item temp = item;
+                item = item.next;
+                return temp;
 
             }
+
             @Override
             public void remove() {
             }
@@ -36,14 +39,17 @@ class LinkedList implements List, Queue, Stack {
 
     static class Item {
         Object obj;
+        int value;
         Item next;
-        Item(Object obj){
-            this.obj=obj;
+
+        Item(Object obj, int value) {
+            this.obj = obj;
+            this.value = value;
         }
     }
-    @Override
-    public void add(Object obj) {
-        Item item = new Item(obj);
+
+    public void add(Object obj, int value) {
+        Item item = new Item(obj, value);
 
         if (count < 0) {
             head = item;
@@ -57,27 +63,27 @@ class LinkedList implements List, Queue, Stack {
         count++;
     }
 
-    @Override
-    public Object poll() {
-        if (count < 0) return "NullPointerObject";
+
+    public Item poll() {
+        if (count < 0) return null;
         Item temp = head;
         head = head.next;
         count--;
-        return temp.obj;
+        return temp;
     }
 
 
-    public Object get(int index) {
-        if (index > count) return "NullPointerObject";
+    public Item get(int index) {
+        if (index > count) return null;
         Item item = head;
         for (int i = 0; i < index; i++) {
             item = item.next;
         }
-        return item.obj;
+        return item;
     }
 
-    public Object remove(int index) {
-        if (index > count || index < 0) return "NullPointerObject";
+    public Item remove(int index) {
+        if (index > count || index < 0) return null;
         Item temp;
         Item item = head;
         if (index == 0) {
@@ -92,7 +98,7 @@ class LinkedList implements List, Queue, Stack {
         }
         count--;
 
-        return temp.obj;
+        return temp;
 
     }
 
@@ -101,12 +107,16 @@ class LinkedList implements List, Queue, Stack {
         return count;
     }
 
-    @Override
-    public void push(Object obj) {
-        add(obj);
+
+    public void push(Object obj,int value) {
+        add(obj,value);
+    }
+    public void clear() {
+
+        head = null;
+        count = -1;
     }
 
-    @Override
     public Object pop() {
         return remove(count);
     }
