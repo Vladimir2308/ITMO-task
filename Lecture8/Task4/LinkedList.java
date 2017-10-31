@@ -2,9 +2,10 @@ package Lecture8.Task4;
 
 import java.util.Iterator;
 
-class LinkedList implements List, Cloneable{
+class LinkedList implements List, Cloneable {
     private Item head;
     private int count;
+
     public LinkedList() {
         head = null;
         count = -1;
@@ -13,21 +14,22 @@ class LinkedList implements List, Cloneable{
     @Override
     public Iterator iterator() {
         return new Iterator() {
-            Item item=head;
-            int i=0;
+            Item item = head;
+            int i = 0;
 
             @Override
             public boolean hasNext() {
-                return item!=null;
+                return item != null;
             }
 
             @Override
             public Object next() {
-              Item temp=item;
-                item=item.next;
-                    return temp.obj;
+                Item temp = item;
+                item = item.next;
+                return temp.obj;
 
             }
+
             @Override
             public void remove() {
             }
@@ -37,10 +39,12 @@ class LinkedList implements List, Cloneable{
     static class Item {
         Object obj;
         Item next;
-        Item(Object obj){
-            this.obj=obj;
+
+        Item(Object obj) {
+            this.obj = obj;
         }
     }
+
     @Override
     public void add(Object obj) {
         Item item = new Item(obj);
@@ -56,9 +60,6 @@ class LinkedList implements List, Cloneable{
         }
         count++;
     }
-
-
-
 
 
     public Object get(int index) {
