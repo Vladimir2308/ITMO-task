@@ -1,12 +1,11 @@
-package Lecture8.Task3;
+package Lecture8.Task4;
 
 import java.util.Iterator;
 
-class LinkedList implements List {
+class LinkedList implements List, Cloneable{
     private Item head;
     private int count;
-
-    LinkedList() {
+    public LinkedList() {
         head = null;
         count = -1;
     }
@@ -14,22 +13,21 @@ class LinkedList implements List {
     @Override
     public Iterator iterator() {
         return new Iterator() {
-            Item item = head;
-            int i = 0;
+            Item item=head;
+            int i=0;
 
             @Override
             public boolean hasNext() {
-                return item != null;
+                return item!=null;
             }
 
             @Override
             public Object next() {
-                Item temp = item;
-                item = item.next;
-                return temp.obj;
+              Item temp=item;
+                item=item.next;
+                    return temp.obj;
 
             }
-
             @Override
             public void remove() {
             }
@@ -39,12 +37,10 @@ class LinkedList implements List {
     static class Item {
         Object obj;
         Item next;
-
-        Item(Object obj) {
-            this.obj = obj;
+        Item(Object obj){
+            this.obj=obj;
         }
     }
-
     @Override
     public void add(Object obj) {
         Item item = new Item(obj);
@@ -60,6 +56,9 @@ class LinkedList implements List {
         }
         count++;
     }
+
+
+
 
 
     public Object get(int index) {
@@ -96,6 +95,11 @@ class LinkedList implements List {
         return count;
     }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
 
     public void print() {
         if (count < 0) {
@@ -109,6 +113,4 @@ class LinkedList implements List {
             temp = temp.next;
         }
     }
-
-
 }
