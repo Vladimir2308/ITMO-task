@@ -1,10 +1,7 @@
 package Lecture8.Task3;
 
 
-
-
 import java.io.File;
-
 
 
 public class Task3Utils {
@@ -26,12 +23,11 @@ public class Task3Utils {
                 if (obj1 == null || obj2 == null) return false;
                 if (obj1.toString().equals(obj2.toString())) return true;
                 return false;
-
             }
         });
 
         Utils.print("List intersect", duplicated);
-        List more1Mb = Utils.filter( new Predicate() {
+        List more1Mb = Utils.filter(new Predicate() {
             @Override
             public boolean apply(Object obj) {
                 File file = (File) obj;
@@ -44,18 +40,18 @@ public class Task3Utils {
                 return false;
 
             }
-        },files1);
+        }, files1);
         Utils.print("List More1Mb", more1Mb);
-        List filesJava = Utils.filter( new Predicate() {
+        List filesJava = Utils.filter(new Predicate() {
             @Override
             public boolean apply(Object obj) {
                 File file = (File) obj;
                 int index = file.getName().lastIndexOf('.');
-                if (index>0)
-                    if (file.getName().substring(index+1).equals("java"))return true;
+                if (index > 0)
+                    if (file.getName().substring(index + 1).equals("java")) return true;
                 return false;
             }
-        },files1);
+        }, files1);
         Utils.print("List filesJava", filesJava);
 
     }
