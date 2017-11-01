@@ -8,6 +8,5 @@ public class Task1 {
         adder.add();
         adder.add();
         System.out.println(adder.getValue());
-
     }
 }
