@@ -1,4 +1,4 @@
-package Lecture9.Task1;
+package Lecture9;
 
 import Lecture8.Task3.Predicate2;
 

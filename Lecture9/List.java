@@ -1,4 +1,4 @@
-package Lecture9.Task1;
+package Lecture9;
 public interface List extends Iterable{
     void add(Object obj);
     Object get(int num);

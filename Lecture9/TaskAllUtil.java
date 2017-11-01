@@ -1,11 +1,11 @@
-package Lecture9.Task1;
+package Lecture9;
 
 import java.util.Iterator;
 
 
 
-import static Lecture9.Task1.Utils.view;
-import static Lecture9.Task1.Utils.viewIterator;
+import static Lecture9.Utils.view;
+import static Lecture9.Utils.viewIterator;
 
 public class TaskAllUtil {
     public static void main(String[] args) {
@@ -16,7 +16,6 @@ public class TaskAllUtil {
         List list1 = Utils.toList(arr1);
         List list2 = Utils.toList(arr2);
         List list3 = Utils.toList(arr3);
-
 
         Iterator view = viewIterator(list1, list1, list2, list3);
 
