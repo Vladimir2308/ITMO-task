@@ -1,14 +1,11 @@
 package Lecture9.Task1;
 
 import Lecture8.Task3.Predicate2;
-import Lecture8.Task3.Transformer;
 
 
 import java.util.Iterator;
 
 public final class Utils {
-    private Utils() {
-    }
 
     static Object find(Predicate p, List list) {
         for (Object o : list) {
@@ -17,7 +14,6 @@ public final class Utils {
         }
         return null;
     }
-
 
     static List filter(Predicate p, List list) {
         List newList = new LinkedList();
@@ -31,13 +27,21 @@ public final class Utils {
     static List transform(Transformer trans, List list) {
         List newList = new LinkedList();
         for (Object o : list) {
-            newList.add(trans.tramsform(o));
+            newList.add(trans.transform(o));
         }
         return newList;
 
     }
 
     static List toList(Object[] arr) {
+        List list = new LinkedList();
+        for (int i = 0; i < arr.length; i++) {
+            list.add(arr[i]);
+        }
+        return list;
+    }
+
+    static List toList(int[] arr) {
         List list = new LinkedList();
         for (int i = 0; i < arr.length; i++) {
             list.add(arr[i]);
@@ -111,50 +115,6 @@ public final class Utils {
         };
     }
 
-    static Iterable filterView(Predicate pred, List list) {
-        return new Iterable() {
-            @Override
-            public Iterator iterator() {
-                return new ViewFilterIterator(pred,list.iterator() );
-            }
-        };
-    }
-    static Iterable filterView(Predicate pred, Iterator it) {
-        return new Iterable() {
-            @Override
-            public Iterator iterator() {
-                return new ViewFilterIterator(pred,it );
-            }
-        };
-    }
-
-    static class ViewFilterIterator implements Iterator {
-        private Object obj;
-        private Iterator it;
-        private Predicate pred;
-
-        public ViewFilterIterator(Predicate pred, Iterator it) {
-            this.it = it;
-            this.pred = pred;
-        }
-
-
-        @Override
-        public boolean hasNext() {
-            while (it.hasNext()) {
-                obj = it.next();
-                if (pred.apply(obj))
-                    return true;
-            }
-            return false;
-        }
-
-        @Override
-        public Object next() {
-            return obj;
-        }
-    }
-
     static class ViewIterator implements Iterator {
         private Iterator[] iters;
         private int idx;
@@ -183,5 +143,112 @@ public final class Utils {
         }
 
 
+    }
+
+    //Predicate
+    static Iterator viewIterator(Predicate p, Iterable it1, Iterable... it2) {
+        Iterator[] iters = new Iterator[it2.length + 1];
+
+        iters[0] = it1.iterator();
+
+        for (int i = 0; i < it2.length; i++)
+            iters[i + 1] = it2[i].iterator();
+
+        return new ViewIteratorFilter(p, iters);
+    }
+
+    public static Iterable view(Predicate p, final Iterable it1, final Iterable... it2) {
+        return new Iterable() {
+            @Override
+            public Iterator iterator() {
+                return viewIterator(p, it1, it2);
+            }
+        };
+    }
+
+    static class ViewIteratorFilter implements Iterator {
+        private Iterator[] iters;
+        private Predicate p;
+        private int idx;
+        Object obj;
+
+
+        public ViewIteratorFilter(Predicate p, Iterator... iters) {
+            this.iters = iters;
+            this.p = p;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (idx == iters.length)
+                return false;
+
+            while (iters[idx].hasNext()) {
+                obj = iters[idx].next();
+                if (p.apply(obj))
+                    return true;
+            }
+            idx++;
+
+            return hasNext();
+        }
+
+        @Override
+        public Object next() {
+            return obj;
+        }
+    }
+
+    //Transformer
+    static Iterator viewIterator(Transformer t, Iterable it1, Iterable... it2) {
+        Iterator[] iters = new Iterator[it2.length + 1];
+
+        iters[0] = it1.iterator();
+
+        for (int i = 0; i < it2.length; i++)
+            iters[i + 1] = it2[i].iterator();
+
+        return new ViewIteratorTransformer(t, iters);
+    }
+
+    public static Iterable view(Transformer t, final Iterable it1, final Iterable... it2) {
+        return new Iterable() {
+            @Override
+            public Iterator iterator() {
+                return viewIterator(t, it1, it2);
+            }
+        };
+    }
+
+    static class ViewIteratorTransformer implements Iterator {
+        private Iterator[] iters;
+        private Transformer t;
+        private int idx;
+        Object obj;
+
+
+        public ViewIteratorTransformer(Transformer t, Iterator... iters) {
+            this.iters = iters;
+            this.t = t;
+
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (idx == iters.length)
+                return false;
+
+            if (iters[idx].hasNext())
+                return true;
+
+            idx++;
+
+            return hasNext();
+        }
+
+        @Override
+        public Object next() {
+            return t.transform(iters[idx].next());
+        }
     }
 }
