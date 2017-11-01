@@ -18,6 +18,6 @@ public class Lecture2LoopsTask13 {
 //                   System.out.println(i + " ");
             }
         }
-        System.out.println("Исключить: " + count);
+        System.out.println(" Исключить: " + count);
     }
 }
