@@ -13,7 +13,7 @@ public final class Utils {
     }
 
 
-    static List filter(List list, Predicate p) {
+    static List filter(Predicate p,List list) {
         List newList = new LinkedList();
         for (Object o : list) {
             if (p.apply(o))

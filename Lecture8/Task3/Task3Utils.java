@@ -5,7 +5,7 @@ package Lecture8.Task3;
 
 import java.io.File;
 
-import static java.io.File.separatorChar;
+
 
 public class Task3Utils {
     public static void main(String[] args) {
@@ -31,7 +31,7 @@ public class Task3Utils {
         });
 
         Utils.print("List intersect", duplicated);
-        List more1Mb = Utils.filter(files1, new Predicate() {
+        List more1Mb = Utils.filter( new Predicate() {
             @Override
             public boolean apply(Object obj) {
                 File file = (File) obj;
@@ -44,9 +44,9 @@ public class Task3Utils {
                 return false;
 
             }
-        });
+        },files1);
         Utils.print("List More1Mb", more1Mb);
-        List filesJava = Utils.filter(files1, new Predicate() {
+        List filesJava = Utils.filter( new Predicate() {
             @Override
             public boolean apply(Object obj) {
                 File file = (File) obj;
@@ -55,7 +55,7 @@ public class Task3Utils {
                     if (file.getName().substring(index+1).equals("java"))return true;
                 return false;
             }
-        });
+        },files1);
         Utils.print("List filesJava", filesJava);
 
     }
