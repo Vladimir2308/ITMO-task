@@ -4,7 +4,7 @@ public class Task1 {
     public static void main(String[] args) {
 
         Accumulator acc = new Accumulator(4, new Plus());
-        System.out.print("  Plus  4 " );
+        System.out.print(" Plus  4 " );
         acc.accumalate(3);
         System.out.print(acc.getValue()+" ");
         acc.accumalate(9);
