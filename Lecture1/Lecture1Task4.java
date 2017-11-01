@@ -9,6 +9,6 @@ public class Lecture1Task4 {
             answer += n % 10;
             n /= 10;
         }
-        System.out.println(" Сумма цифр числа = " + answer);
+        System.out.println("Сумма цифр числа = " + answer);
     }
 }
