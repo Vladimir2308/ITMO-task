@@ -105,7 +105,6 @@ class LinkedList<E> implements List,Stack,Queue, Cloneable {
         count--;
 
         return temp.obj;
-
     }
 
     @Override
