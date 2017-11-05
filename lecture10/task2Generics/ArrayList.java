@@ -2,7 +2,7 @@ package lecture10.task2Generics;
 
 import java.util.Iterator;
 
-public class ArrayList<E> implements List, Stack, Queue {
+public class ArrayList<E> implements List<E>, Stack<E>, Queue<E> {
     private int count;
     private int maxSize;
     private Object[] array;
@@ -17,14 +17,14 @@ public class ArrayList<E> implements List, Stack, Queue {
 
 
     @Override
-    public void add(Object obj) {
+    public void add(E obj) {
         if (++number == maxSize) {
             int oldSize = maxSize;
             maxSize *= 1.5;
             Object[] newarray = new Object[maxSize];
             number = -1;
             for (int i = 0; i < oldSize; i++) {
-                if (!array[i].equals("NullPointer")) {
+                if (!array[i].equals(null)) {
                     newarray[++number] = array[i];
                 }
             }
@@ -36,51 +36,51 @@ public class ArrayList<E> implements List, Stack, Queue {
     }
 
     @Override
-    public Object poll() {
+    public E poll() {
         if (count >= 0) {
             int i = 0;
             while (i < number) {
-                if (array[i].equals("NullPointer"))
+                if (array[i].equals(null))
                     i++;
                 else {
-                   Object temp = array[i];
-                    array[i] = "NullPointer";
+                   E temp = (E)array[i];
+                    array[i] = null;
                     count--;
                     return temp;
                 }
             }
         }
-        return "NullPointer";
+        return null;
     }
 
     @Override
-    public Object get(int num) {
+    public E get(int num) {
         if (num <= count) {
             int j = 0;
             int i = 0;
             while (j < num) {
-                if (!array[i++].equals("NullPointer")) j++;
+                if (!array[i++].equals(null)) j++;
             }
-            return array[i];
+            return (E)array[i];
         }
-        return "NullPointer";
+        return null;
     }
 
     @Override
-    public Object remove(int num) {
+    public E remove(int num) {
         if (num <= count && count >= 0) {
             int j = -1;
             int i = 0;
             for (; i < number; i++) {
-                if (!array[i].equals("NullPointer"))
+                if (array[i]!=null)
                     if (++j == num) break;
             }
-            Object temp = array[i];
-            array[i] = "NullPointer";
+            E temp = (E)array[i];
+            array[i] = null;
             count--;
             return temp;
         }
-        return "NullPointer";
+        return null;
     }
 
     @Override
@@ -89,12 +89,12 @@ public class ArrayList<E> implements List, Stack, Queue {
     }
 
     @Override
-    public void push(Object obj) {
+    public void push(E obj) {
         add(obj);
     }
 
     @Override
-    public Object pop() {
+    public E pop() {
         return remove(count);
 
     }
@@ -135,7 +135,7 @@ public class ArrayList<E> implements List, Stack, Queue {
             @Override
             public Object next() {
                 if (index <= count) {
-                    while (array[num].equals("NullPointer"))
+                    while (array[num].equals(null))
                         num++;
                     index++;
                     return array[num++];

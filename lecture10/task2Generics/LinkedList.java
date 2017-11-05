@@ -2,8 +2,8 @@ package lecture10.task2Generics;
 
 import java.util.Iterator;
 
-class LinkedList<E> implements List,Stack,Queue, Cloneable {
-    private Item head;
+class LinkedList<E> implements List<E>,Stack<E>,Queue<E>, Cloneable {
+    private Item<E> head;
     private int count;
 
     public LinkedList() {
@@ -14,8 +14,8 @@ class LinkedList<E> implements List,Stack,Queue, Cloneable {
     @Override
     public Iterator iterator() {
         return new Iterator() {
-            Item item = head;
-            int i = 0;
+            Item<E> item = head;
+
 
             @Override
             public boolean hasNext() {
@@ -23,8 +23,8 @@ class LinkedList<E> implements List,Stack,Queue, Cloneable {
             }
 
             @Override
-            public Object next() {
-                Item temp = item;
+            public E next() {
+                Item<E> temp = item;
                 item = item.next;
                 return temp.obj;
 
@@ -36,18 +36,18 @@ class LinkedList<E> implements List,Stack,Queue, Cloneable {
         };
     }
 
-    static class Item {
-        Object obj;
-        Item next;
+    static class Item<E> {
+        E obj;
+        Item<E> next;
 
-        Item(Object obj) {
+        Item(E obj) {
             this.obj = obj;
         }
     }
 
     @Override
-    public void add(Object obj) {
-        Item item = new Item(obj);
+    public void add(E obj) {
+        Item<E> item = new Item<>(obj);
 
         if (count < 0) {
             head = item;
@@ -61,37 +61,37 @@ class LinkedList<E> implements List,Stack,Queue, Cloneable {
         count++;
     }
     @Override
-    public void push(Object obj) {
+    public void push(E obj) {
         add(obj);
     }
 
     @Override
-    public Object pop() {
+    public E pop() {
         return remove(count);
     }
     @Override
-    public Object poll() {
-        if (count < 0) return "NullPointerObject";
-        Item temp = head;
+    public E poll() {
+        if (count < 0) return null;
+        Item<E> temp = head;
         head = head.next;
         count--;
         return temp.obj;
     }
 
 
-    public Object get(int index) {
-        if (index > count) return "NullPointerObject";
-        Item item = head;
+    public E get(int index) {
+        if (index > count) return null;
+        Item<E> item = head;
         for (int i = 0; i < index; i++) {
             item = item.next;
         }
         return item.obj;
     }
 
-    public Object remove(int index) {
-        if (index > count || index < 0) return "NullPointerObject";
-        Item temp;
-        Item item = head;
+    public E remove(int index) {
+        if (index > count || index < 0) return null;
+        Item<E> temp;
+        Item<E> item = head;
         if (index == 0) {
             temp = item;
             head = item.next;
@@ -123,7 +123,7 @@ class LinkedList<E> implements List,Stack,Queue, Cloneable {
             System.out.println(" List is Empty");
             return;
         }
-        Item temp = head;
+        Item<E> temp = head;
         int i = 0;
         while (temp != null) {
             System.out.println("[" + i++ + "] " + temp.obj);

@@ -18,6 +18,7 @@ public class Task2Generics {
         stack.push(22);
         stack.push(14);
         stack.push(1110);
+
         Utils.print("Stack stack ", stack);
         stack.pop();
         Utils.print("Stack stack ", stack);
