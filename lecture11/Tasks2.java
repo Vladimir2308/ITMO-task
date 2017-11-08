@@ -4,10 +4,7 @@ import lecture11.inner.Message;
 import lecture11.inner.MessagePriority;
 import lecture11.inner.User;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NavigableSet;
+import java.util.*;
 
 import static lecture11.inner.UserGenerator.generate;
 
@@ -16,16 +13,43 @@ import static lecture11.inner.UserGenerator.generate;
  */
 public class Tasks2 {
     public static void main(String[] args) {
-        System.out.println(generate(10));
+        List list = generate(10);
+        System.out.println(list);
+        NavigableSet<User> set= sortedByCompanyAndName(list);
+        System.out.println(set);
     }
 
-    private static void sortByPriority(List<Message> messages, MessagePriority priority) {
+    private static void sortByPriority(List<Message> messages) {
+        boolean order = true;
+        Collections.sort(messages, new Comparator<Message>() {
+            public int compare(Message m1,
+                               Message m2) {
+                if (order) {
+                    return m1.getPriority().compareTo(m2.getPriority());
+                } else {
+                    return m2.getPriority().compareTo(m1.getPriority());
 
+                }
+            }
+        });
     }
 
     private static NavigableSet<User> sortedByCompanyAndName(List<User> users) {
+        boolean order = true;
 
-        return Collections.emptyNavigableSet();
+        TreeSet<User> set = new TreeSet<User>( new Comparator<User>() {
+            public int compare(User m1,
+                               User m2) {
+
+                    if (m1.getCompany().equals(m2.getCompany())) {
+                        return m1.getName().compareTo(m2.getName());
+                    } else
+                        return m1.getCompany().compareTo(m2.getCompany());
+
+            }
+        });
+        set.addAll(users);
+        return set;
     }
 
     private static NavigableSet<User> sortedBySalaryAndName(List<User> users) {

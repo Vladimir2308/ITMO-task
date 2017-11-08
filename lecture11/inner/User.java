@@ -83,4 +83,5 @@ public class User {
         result = 31 * result + (company != null ? company.hashCode() : 0);
         return result;
     }
+
 }

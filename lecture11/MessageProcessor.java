@@ -17,8 +17,12 @@ public class MessageProcessor {
 
     private static final String SEPARATOR_1 = " ";
     private static final String SEPARATOR_2 = ",";
+    private static Deque<String> stepsDeq;
+    private static Deque<String> stepsUndo;
 
     public static void main(String[] args) {
+        stepsDeq = new ArrayDeque<>();
+        stepsUndo = new ArrayDeque<>();
         Scanner scanner = new Scanner(System.in);
         MessageProcessor processor = new MessageProcessor();
 
@@ -34,7 +38,7 @@ public class MessageProcessor {
             else if (HELP_CMD.equals(line))
                 printUsage();
 
-            else if(PROCESS_CMD.equals(line))
+            else if (PROCESS_CMD.equals(line))
                 processor.processMessages();
 
             else if (line.startsWith(UNDO_CMD))
@@ -54,6 +58,8 @@ public class MessageProcessor {
                             Integer.parseInt(argSplit[1])
                     ));
                 }
+                stepsDeq.addFirst(line);
+                stepsUndo.clear();
             }
         }
     }
@@ -83,7 +89,7 @@ public class MessageProcessor {
     }
 
     private void processMessages() {
-
+        System.out.println(" processing ");
     }
 
     private void process(Message message) {
@@ -95,10 +101,26 @@ public class MessageProcessor {
     }
 
     private void undo(int steps) {
+        for (int i = 0; i < steps; i++) {
+            if (stepsDeq.size()>0){
+            String temp=stepsDeq.pop();
+            stepsUndo.addFirst(temp);
+            System.out.println("Отменено: "+ temp);}
+            else
+                System.out.println("Невозможно отменить");
+        }
 
     }
 
     private void redo(int steps) {
-
+        for (int i = 0; i < steps; i++) {
+            if (stepsUndo.size()>0){
+            String temp=stepsUndo.pop();
+            stepsDeq.addFirst(temp);
+            System.out.println("Выполнено: "+ temp);
+            }
+            else
+                System.out.println("Невозможно выполнить");
+        }
     }
 }

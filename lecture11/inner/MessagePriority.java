@@ -14,4 +14,11 @@ public enum MessagePriority {
 
         throw new AssertionError("Wrong ordinal: " + ord);
     }
+    public static int ordinal(MessagePriority mp2) {
+
+                return mp2.ordinal();
+       }
+
+
+
 }
