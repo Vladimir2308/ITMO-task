@@ -63,7 +63,14 @@ class LinkedList implements List, Cloneable {
 
 
     public Object get(int index) {
-        if (index > count) return "NullPointerObject";
+        if (index > count){
+            try {
+                throw new NullPointerException("ArrayList don't contain value of this num, get another num");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
         Item item = head;
         for (int i = 0; i < index; i++) {
             item = item.next;
@@ -72,7 +79,7 @@ class LinkedList implements List, Cloneable {
     }
 
     public Object remove(int index) {
-        if (index > count || index < 0) return "NullPointerObject";
+        if (index > count || index < 0) return null;
         Item temp;
         Item item = head;
         if (index == 0) {

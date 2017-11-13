@@ -31,7 +31,7 @@ class LinkedList implements List, Queue, Stack {
 
     @Override
     public Object poll() {
-        if (count < 0) return "NullPointerObject";
+        if (count < 0) return "null";
         Item temp = head;
         head = head.next;
         count--;
