@@ -1,7 +1,6 @@
 package lecture11;
 
 import lecture11.inner.Message;
-import lecture11.inner.MessagePriority;
 import lecture11.inner.User;
 
 import java.util.*;
@@ -16,6 +15,8 @@ public class Tasks2 {
         List list = generate(10);
         System.out.println(list);
         NavigableSet<User> set= sortedByCompanyAndName(list);
+        System.out.println(set);
+        set= sortedBySalaryAndName(list);
         System.out.println(set);
     }
 
@@ -35,9 +36,8 @@ public class Tasks2 {
     }
 
     private static NavigableSet<User> sortedByCompanyAndName(List<User> users) {
-        boolean order = true;
 
-        TreeSet<User> set = new TreeSet<User>( new Comparator<User>() {
+        TreeSet<User> set = new TreeSet<>( new Comparator<User>() {
             public int compare(User m1,
                                User m2) {
 
@@ -53,8 +53,19 @@ public class Tasks2 {
     }
 
     private static NavigableSet<User> sortedBySalaryAndName(List<User> users) {
+        TreeSet<User> set = new TreeSet<User>( new Comparator<User>() {
+            public int compare(User m1,
+                               User m2) {
 
-        return Collections.emptyNavigableSet();
+                if (m1.getSalary()==m2.getSalary()) {
+                    return m1.getSalary()-m2.getSalary();
+                } else
+                    return m1.getName().compareTo(m2.getName());
+
+            }
+        });
+        set.addAll(users);
+        return set;
     }
 
     private static NavigableSet<User> sortedBySalaryAgeCompanyAndName(List<User> users) {
