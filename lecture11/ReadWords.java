@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.*;
-import java.util.HashMap;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -124,12 +122,14 @@ public class ReadWords {
         File text = new File("out\\production\\Study\\lecture11\\wp.txt");
 
         // Вычитываем все строки из файла
+        long time= System.currentTimeMillis();
         List<String> lines = Files.readAllLines(text.toPath());
 
         HashMap<String, Integer> wordsUnsorted = getWordsUnsotred(lines, true);
         HashMap<String, Integer> wordsSorted = (HashMap) MapUtil.sortByComparator(wordsUnsorted, false);
         System.out.println("Top 10 words with articles");
         MapUtil.printlnCount(wordsSorted, 10);
+        System.out.println( System.currentTimeMillis()-time);
 //        MapUtil.println(wordsSorted);
 
         HashMap<String, Integer> wordsUnsortedWithoutArticl = getWordsUnsotred(lines, false);

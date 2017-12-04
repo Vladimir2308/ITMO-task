@@ -16,32 +16,32 @@ public class Pizza {
                 '}';
     }
 
-    static class Builder {
+    public static class Builder {
         private final int dough;
         private int cheese = 0;
         private int meat = 0;
         private int tomato = 0;
 
-        Builder(int dough) {
+       public Builder(int dough) {
             this.dough = dough;
         }
 
-        Builder cheese(int val) {
+       public  Builder cheese(int val) {
             cheese = val;
             return this;
         }
 
-        Builder meat(int val) {
+        public   Builder meat(int val) {
             meat = val;
             return this;
         }
 
-        Builder tomato(int val) {
+        public  Builder tomato(int val) {
             tomato = val;
             return this;
         }
 
-        Pizza build() {
+        public    Pizza build() {
             return new Pizza(this);
         }
     }

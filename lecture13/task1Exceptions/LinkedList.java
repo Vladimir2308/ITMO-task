@@ -3,11 +3,11 @@ package lecture13.task1Exceptions;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
-class LinkedList implements List {
+public class LinkedList implements List {
     private Item head;
     private int count;
     private long version=0;
-    LinkedList() {
+    public LinkedList() {
         head = null;
         count = -1;
     }

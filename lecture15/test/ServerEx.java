@@ -10,5 +10,7 @@ public class ServerEx extends Server {
         System.out.println(Server.x);
         Server.sum();
         System.out.println(y);
+        String s= null;
+        System.out.println(s.equals(null));
     }
 }

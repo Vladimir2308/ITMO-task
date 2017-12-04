@@ -6,7 +6,7 @@ public final class MapUtil {
     private MapUtil() {
     }
 
-    static Map<String, Integer> sortByComparator(Map<String, Integer> unsortMap, boolean order) {
+    public static Map<String, Integer> sortByComparator(Map<String, Integer> unsortMap, boolean order) {
 
         List<Map.Entry<String, Integer>> list = new
 
