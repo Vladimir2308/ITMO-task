@@ -1,4 +1,4 @@
-package lectyre21;
+package lecture21;
 
 import lecture11.MapUtil;
 
