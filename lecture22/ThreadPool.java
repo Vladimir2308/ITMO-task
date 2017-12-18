@@ -81,7 +81,6 @@ public class ThreadPool {
                         }
                     }
 
-
                     return wordPart;
                 }
             });

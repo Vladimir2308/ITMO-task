@@ -24,7 +24,6 @@ public class WPStream {
                     .map(line -> line.toLowerCase().replaceAll("\\pP", " "))
                     .flatMap(line -> Arrays.stream(line.split(" ")))
                     .map(String::trim)
-
                     .filter(word -> word.length() == 10)
                     .collect(groupingBy(identity(), counting()))
 
