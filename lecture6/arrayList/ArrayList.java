@@ -12,6 +12,7 @@ public class ArrayList implements List, Stack, Queue {
 
     ArrayList() {
         maxSize = 100;
+
         count = -1;
         number = -1;
         array = new Object[maxSize];
